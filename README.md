@@ -65,3 +65,4 @@ Ejecuta `npm test` para comprobar las reglas de progresión, desbloqueo de enemi
 
 **Previsto para fases posteriores:** multijugador, cuentas, autenticación, persistencia, base de datos, tabla de puntuaciones, modelos 3D detallados y audio. No forman parte de este prototipo.
 # juego-de-disparos-y-zombis
+# juego-de-disparos-y-zombis
