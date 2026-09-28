@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="theme-color" content="#08100d">
+	<title>Última guardia | Supervivencia zombi 3D</title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./style.css">
+	<script type="importmap">
+		{
+			"imports": {
+				"three": "/node_modules/three/build/three.module.js",
+				"three/addons/": "/node_modules/three/examples/jsm/"
+			}
+		}
+	</script>
+	<script type="module" src="./game.js"></script>
+</head>
+<body>
+	<main id="game" aria-label="Supervivencia zombi en primera persona">
+		<div id="scene-container" aria-hidden="true"></div>
+		<div id="damage-overlay" aria-hidden="true"></div>
+		<div class="vignette" aria-hidden="true"></div>
+
+		<section id="start-screen" class="screen screen--start" aria-labelledby="game-title">
+			<div class="title-block">
+				<p class="eyebrow"><span class="live-dot"></span> TRANSMISIÓN DE EMERGENCIA · SECTOR 07</p>
+				<h1 id="game-title">ÚLTIMA<br><span>GUARDIA</span></h1>
+				<p class="intro">La noche cayó sobre el bosque. No dejes que se acerquen.</p>
+				<button id="start-button" class="action-button" type="button">Jugar <span aria-hidden="true">↗</span></button>
+			</div>
+			<aside class="briefing" aria-label="Controles del juego">
+				<p class="briefing-title">PROTOCOLO DE SUPERVIVENCIA</p>
+				<div class="control-row"><span class="key-group"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>Moverse</span></div>
+				<div class="control-row"><span class="mouse-icon" aria-hidden="true"></span><span>Mirar</span></div>
+				<div class="control-row"><span class="mouse-left">CLIC IZQ.</span><span>Disparar</span></div>
+				<div class="control-row"><kbd>R</kbd><span>Recargar · reserva ilimitada</span></div><p class="briefing-note">Clic en «Jugar» para activar el ratón. Pulsa Esc para pausar.</p>
+			</aside>
+			<div class="screen-footer"><span>UNA NOCHE. SIN REFUERZOS.</span><span>PROTOCOLO 01 / 03</span></div>
+		</section>
+
+		<section id="pause-screen" class="screen screen--compact hidden" aria-labelledby="pause-title">
+			<p class="eyebrow">DESCANSO NO SIGNIFICA SEGURIDAD</p>
+			<h2 id="pause-title">EN PAUSA</h2>
+			<button id="resume-button" class="action-button" type="button">Continuar <span aria-hidden="true">↗</span></button>
+			<p class="subtle-note">Pulsa Continuar para volver al bosque.</p>
+		</section>
+
+		<section id="game-over-screen" class="screen screen--compact hidden" aria-labelledby="game-over-title">
+			<p class="eyebrow">SEÑAL PERDIDA · SECTOR 07</p>
+			<h2 id="game-over-title">NO SOBREVIVISTE</h2>
+			<p class="result-line">Zombis eliminados <strong id="final-score">0</strong></p>
+			<button id="restart-button" class="action-button" type="button">Intentar de nuevo <span aria-hidden="true">↻</span></button>
+		</section>
+
+		<div id="hud" class="hud hidden" aria-live="polite">
+			<div class="hud-block health-block">
+				<span class="hud-label">ESTADO</span>
+				<div class="health-line"><span class="health-cross" aria-hidden="true">+</span><strong><span id="health-val">100</span><small>%</small></strong></div>
+				<div class="health-track"><span id="health-fill"></span></div>
+			</div>
+			<div class="hud-block score-block"><span class="hud-label">ELIMINADOS</span><strong id="score-val">00</strong></div>
+			<div class="hud-block ammo-block"><span class="hud-label" id="weapon-status">FUSIL · AUTOMÁTICO</span><strong id="ammo-val">24</strong><span class="ammo-cap"> / 24</span><p>R · RECARGAR &nbsp; / &nbsp; RESERVA ∞</p></div><div class="threat-block"><span class="hud-label">NIVEL DE AMENAZA <strong id="wave-val">01</strong></span><span id="threat-note">Errantes en el perímetro</span></div><div class="hud-location"><span class="live-dot"></span> BOSQUE · 02:17 AM</div>
+		</div>
+
+		<div id="crosshair" class="crosshair hidden" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
+		<div id="hit-marker" class="hit-marker" aria-hidden="true">×</div>
+		<div id="game-error" class="game-error hidden" role="alert"></div>
+	</main>
+</body>
+</html>

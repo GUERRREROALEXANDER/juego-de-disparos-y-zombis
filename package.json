@@ -1,0 +1,17 @@
+{
+  "name": "supervivencia-zombi-3d",
+  "version": "1.0.0",
+  "description": "Prototipo de juego de supervivencia zombi para Calidad de Software",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test combat.test.mjs"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "three": "^0.180.0"
+  }
+}
