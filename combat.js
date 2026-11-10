@@ -16,4 +16,10 @@ export function chooseType(level, roll) {
     if (level >= 2 && roll < 0.55) return 'runner';
     return 'walker';
 }
-export function shotDamage(headshot) { return headshot ? 3 : 1; }
+
+// Multiplicador de daño según la precisión del disparo
+export function shotDamage(headshot) {
+
+    return headshot ? 3 : 1;
+
+}
