@@ -17,6 +17,7 @@
 			}
 		}
 	</script>
+	<script src="/socket.io/socket.io.js"></script>
 	<script type="module" src="./game.js"></script>
 </head>
 <body>
@@ -30,7 +31,133 @@
 				<p class="eyebrow"><span class="live-dot"></span> TRANSMISIÓN DE EMERGENCIA · SECTOR 07</p>
 				<h1 id="game-title">ÚLTIMA<br><span>GUARDIA</span></h1>
 				<p class="intro">La noche cayó sobre el bosque. No dejes que se acerquen.</p>
-				<button id="start-button" class="action-button" type="button">Jugar <span aria-hidden="true">↗</span></button>
+				<!-- SELECTOR DE MAPAS -->
+<div class="map-selector">
+
+    <p class="map-selector-label">
+        SELECCIONA TU ESCENARIO
+    </p>
+
+    <div class="map-options">
+
+        <!-- MAPA 1 -->
+        <button
+            class="map-option"
+            type="button"
+            data-map="forest"
+            aria-pressed="true"
+        >
+
+            <span class="map-option-icon">🌲</span>
+
+            <span class="map-option-copy">
+                <strong>Bosque nocturno</strong>
+                <small>Árboles, casas y niebla.</small>
+            </span>
+
+            <span class="map-option-check">✓</span>
+
+        </button>
+
+        <!-- MAPA 2 -->
+        <button
+            class="map-option"
+            type="button"
+            data-map="village"
+            aria-pressed="false"
+        >
+
+            <span class="map-option-icon">🏚️</span>
+
+            <span class="map-option-copy">
+                <strong>Pueblo abandonado</strong>
+                <small>Carreteras, casas y contenedores.</small>
+            </span>
+
+            <span class="map-option-check">✓</span>
+
+        </button>
+
+    </div>
+
+    <p id="map-description" class="map-description">
+        Sobrevive en un bosque lleno de zombis.
+    </p>
+
+</div>
+
+<!-- BOTÓN PARA COMENZAR -->
+ <!-- SELECTOR DE ARMAS -->
+
+<div class="weapon-selector">
+
+    <p class="weapon-selector-title">
+        ARSENAL DISPONIBLE
+    </p>
+
+    <div class="weapon-options">
+
+        <button
+            class="weapon-option is-selected"
+            data-weapon="pistol"
+            aria-pressed="true"
+            type="button"
+        >
+            <span class="weapon-key">1</span>
+
+            <span class="weapon-icon">🔫</span>
+
+            <span class="weapon-info">
+                <strong>PISTOLA</strong>
+                <small>12 BALAS · EQUILIBRADA</small>
+            </span>
+
+        </button>
+
+        <button
+            class="weapon-option"
+            data-weapon="shotgun"
+            aria-pressed="false"
+            type="button"
+        >
+            <span class="weapon-key">2</span>
+
+            <span class="weapon-icon">💥</span>
+
+            <span class="weapon-info">
+                <strong>ESCOPETA</strong>
+                <small>8 BALAS · ALTO DAÑO</small>
+            </span>
+
+        </button>
+
+        <button
+            class="weapon-option"
+            data-weapon="rifle"
+            aria-pressed="false"
+            type="button"
+        >
+            <span class="weapon-key">3</span>
+
+            <span class="weapon-icon">🎯</span>
+
+            <span class="weapon-info">
+                <strong>RIFLE DE ASALTO</strong>
+                <small>30 BALAS · AUTOMÁTICO</small>
+            </span>
+
+        </button>
+
+    </div>
+
+    <p class="weapon-selector-note">
+        Selecciona tu arma antes de comenzar.
+    </p>
+
+</div>
+<button id="start-button" class="action-button" type="button">
+    Jugar <span aria-hidden="true">↗</span>
+</button>
 			</div>
 			<aside class="briefing" aria-label="Controles del juego">
 				<p class="briefing-title">PROTOCOLO DE SUPERVIVENCIA</p>
@@ -63,9 +190,40 @@
 				<div class="health-track"><span id="health-fill"></span></div>
 			</div>
 			<div class="hud-block score-block"><span class="hud-label">ELIMINADOS</span><strong id="score-val">00</strong></div>
-			<div class="hud-block ammo-block"><span class="hud-label" id="weapon-status">FUSIL · AUTOMÁTICO</span><strong id="ammo-val">24</strong><span class="ammo-cap"> / 24</span><p>R · RECARGAR &nbsp; / &nbsp; RESERVA ∞</p></div><div class="threat-block"><span class="hud-label">NIVEL DE AMENAZA <strong id="wave-val">01</strong></span><span id="threat-note">Errantes en el perímetro</span></div><div class="hud-location"><span class="live-dot"></span> BOSQUE · 02:17 AM</div>
-		</div>
+			<!-- PANEL DE ARMAS Y MUNICIÓN -->
+<div class="hud-block weapon-block">
 
+    <span class="hud-label">ARMAMENTO</span>
+
+    <div id="weapon-status" class="weapon-status">
+        PISTOLA
+    </div>
+
+    <div class="ammo-display">
+        <strong id="ammo-val">12</strong>
+        <span class="ammo-cap"> / 12</span>
+    </div>
+
+    <span class="ammo-help">R · RECARGAR</span>
+
+</div>
+			<div class="hud-location">
+    <span class="live-dot"></span>
+
+    <span id="hud-map-name">
+        BOSQUE NOCTURNO · 02:17 AM
+    </span>
+</div>
+		</div><div id="minimap">
+   <div class="map-title" id="map-title">
+    MAPA · BOSQUE
+</div>
+    <canvas id="minimap-canvas" width="180" height="180"></canvas>
+</div>
+<div id="multiplayer-status" class="multiplayer-status"
+     role="status" aria-live="polite">
+    MULTIJUGADOR · ESPERANDO CONEXIÓN
+</div>
 		<div id="crosshair" class="crosshair hidden" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
 		<div id="hit-marker" class="hit-marker" aria-hidden="true">×</div>
 		<div id="game-error" class="game-error hidden" role="alert"></div>

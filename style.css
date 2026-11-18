@@ -58,7 +58,16 @@ kbd { display: inline-flex; align-items: center; justify-content: center; width:
 .score-block strong { font: 700 30px 'Barlow Condensed', sans-serif; color: var(--acid); }
 .hud-location { position: absolute; right: 32px; bottom: 28px; display: flex; align-items: center; gap: 9px; color: #bac3b8; font-size: 9px; }
 .hud-location .live-dot { width: 6px; height: 6px; }
-.crosshair { position: fixed; z-index: 2; left: 50%; top: 50%; width: 28px; height: 28px; transform: translate(-50%, -50%); pointer-events: none; }
+.crosshair {
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  top: 50%;
+  width: 28px;
+  height: 28px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
 .crosshair i { position: absolute; background: rgba(241, 246, 232, .9); box-shadow: 0 0 4px #080e0b; }
 .crosshair i:nth-child(1), .crosshair i:nth-child(2) { left: 13px; width: 2px; height: 7px; }
 .crosshair i:nth-child(1) { top: 0; } .crosshair i:nth-child(2) { bottom: 0; }
@@ -102,3 +111,552 @@ kbd { display: inline-flex; align-items: center; justify-content: center; width:
   .intro { margin: 16px 0; }
 }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+/* ===== MEJORAS VISUALES: ÚLTIMA GUARDIA ===== */
+
+/* Transiciones más suaves y consistentes */
+.action-button {
+  border-radius: 3px;
+  letter-spacing: 0.4px;
+  box-shadow: 0 4px 18px rgba(212, 243, 106, 0.12);
+}
+
+.action-button:hover {
+  box-shadow: 0 7px 24px rgba(212, 243, 106, 0.24);
+}
+
+.action-button:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Panel de instrucciones más legible */
+.briefing {
+  border: 1px solid rgba(212, 243, 106, 0.16);
+  border-left: 2px solid var(--acid);
+  border-radius: 4px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Paneles del HUD */
+.hud-block,
+.threat-block {
+  border-radius: 3px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+}
+
+/* Respuesta visual cuando la salud está baja */
+.health-track span {
+  transition:
+    width 0.2s ease,
+    background-color 0.2s ease;
+}
+
+/* Pantallas de pausa y derrota */
+.screen--compact {
+  padding: 24px;
+}
+
+.screen--compact .action-button {
+  margin-top: 8px;
+}
+
+/* Mejor adaptación a pantallas pequeñas */
+@media (max-width: 720px) {
+  .eyebrow {
+    font-size: 9px;
+    letter-spacing: 1.2px;
+  }
+
+  .screen--compact h2 {
+    font-size: clamp(40px, 10vw, 64px);
+  }
+
+  .game-error {
+    bottom: 12px;
+    font-size: 12px;
+  }
+}
+
+/* Accesibilidad: foco visible con teclado */
+button:focus-visible {
+  outline: 3px solid var(--paper);
+  outline-offset: 4px;
+}
+
+/* Indicador de conexión multijugador */
+.multiplayer-status {
+  position: fixed;
+  z-index: 4;
+  top: 105px;
+  left: 32px;
+  padding: 8px 12px;
+  background: rgba(9, 17, 14, 0.9);
+  border: 1px solid rgba(212, 243, 106, 0.35);
+  border-radius: 3px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  pointer-events: none;
+}
+
+.multiplayer-status.is-connected {
+  color: var(--acid);
+  border-color: var(--acid);
+}
+
+.multiplayer-status.is-disconnected {
+  color: var(--blood);
+  border-color: var(--blood);
+}
+
+@media (max-width: 720px) {
+  .multiplayer-status {
+    top: 100px;
+    left: 16px;
+    font-size: 9px;
+  }
+}
+/* MINIMAPA MEJORADO */
+
+#minimap {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+
+    width: 200px;
+
+    padding: 10px;
+
+    background: rgba(5, 15, 10, 0.9);
+
+    border: 1px solid #65a879;
+
+    border-radius: 12px;
+
+    box-shadow: 0 0 20px rgba(0, 255, 100, 0.15);
+
+    z-index: 5;
+}
+
+.map-title {
+    color: #8cffaa;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    margin-bottom: 8px;
+
+    letter-spacing: 2px;
+}
+
+#minimap-canvas {
+    width: 180px;
+    height: 180px;
+
+    display: block;
+
+    margin: auto;
+
+    border-radius: 8px;
+}
+/* ==================================
+   SELECTOR DE MAPAS
+================================== */
+
+.map-selector {
+    width: min(430px, 100%);
+    margin-bottom: 22px;
+}
+
+.map-selector-label {
+    color: var(--acid);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.map-options {
+    display: grid;
+    gap: 9px;
+}
+
+.map-option {
+    width: 100%;
+    min-height: 68px;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 11px 14px;
+
+    background: rgba(9, 17, 14, 0.88);
+
+    color: var(--paper);
+
+    border: 1px solid rgba(233, 238, 231, 0.2);
+
+    border-radius: 4px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition: 0.2s ease;
+}
+
+.map-option:hover {
+    border-color: var(--acid);
+    background: rgba(35, 48, 34, 0.95);
+}
+
+.map-option.is-selected {
+
+    border-color: var(--acid);
+
+    background: rgba(50, 66, 37, 0.8);
+
+    box-shadow: inset 3px 0 var(--acid);
+}
+
+.map-option-icon {
+    font-size: 27px;
+
+    width: 38px;
+
+    text-align: center;
+}
+
+.map-option-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    flex: 1;
+}
+
+.map-option-copy strong {
+    font-size: 13px;
+    color: white;
+}
+
+.map-option-copy small {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.map-option-check {
+    color: var(--acid);
+    font-size: 20px;
+    opacity: 0;
+}
+
+.map-option.is-selected .map-option-check {
+    opacity: 1;
+}
+
+.map-description {
+    color: #aab5a8;
+    font-size: 10px;
+    margin: 10px 0 0;
+}
+
+/* Adaptación para pantallas pequeñas */
+
+@media (max-width: 720px) {
+
+    .screen--start {
+        overflow-y: auto;
+        padding-bottom: 30px;
+    }
+
+    .map-selector {
+        margin-bottom: 16px;
+    }
+
+    .briefing {
+        position: static;
+        width: min(100%, 430px);
+        margin-top: 22px;
+    }
+
+    .screen-footer {
+        position: static;
+        width: 100%;
+        margin-top: 20px;
+    }
+}/* =================================
+   MENU DE ARMAS
+================================= */
+
+.weapon-selector {
+
+    width: min(430px, 100%);
+
+    margin: 18px 0;
+
+}
+
+.weapon-selector-title {
+
+    color: #a5d65b;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
+
+}
+
+.weapon-options {
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+}
+
+.weapon-option {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    width: 100%;
+
+    min-height: 58px;
+
+    padding: 9px 13px;
+
+    color: white;
+
+    background: rgba(12, 20, 16, 0.9);
+
+    border: 1px solid rgba(255,255,255,0.16);
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition: 0.2s ease;
+
+}
+
+.weapon-option:hover {
+
+    background: rgba(48, 66, 38, 0.9);
+
+    border-color: #a5d65b;
+
+}
+
+.weapon-option.is-selected {
+
+    background: rgba(59, 79, 39, 0.9);
+
+    border-color: #a5d65b;
+
+    box-shadow: inset 3px 0 #a5d65b;
+
+}
+
+.weapon-key {
+
+    width: 25px;
+
+    height: 25px;
+
+    display: grid;
+
+    place-items: center;
+
+    background: rgba(255,255,255,0.1);
+
+    border-radius: 4px;
+
+    font-weight: bold;
+
+}
+
+.weapon-icon {
+
+    font-size: 23px;
+
+}
+
+.weapon-info {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 3px;
+
+}
+
+.weapon-info strong {
+
+    font-size: 12px;
+
+}
+
+.weapon-info small {
+
+    color: #abb5a8;
+
+    font-size: 9px;
+
+}
+
+.weapon-selector-note {
+
+    color: #aab5a8;
+
+    font-size: 10px;
+
+    margin-top: 9px;
+
+}/* =====================================
+   CORRECCIÓN DEL MENÚ PRINCIPAL
+===================================== */
+
+/* Permitir desplazamiento del menú */
+#start-screen,
+.screen--start {
+    max-height: 100vh;
+    max-height: 100dvh;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    box-sizing: border-box;
+
+    padding-bottom: 35px;
+
+    scrollbar-width: thin;
+    scrollbar-color: #a5d65b #101810;
+}
+
+/* Reducir espacio del selector de mapas */
+.map-selector {
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+.map-options {
+    gap: 6px;
+}
+
+.map-option {
+    min-height: 55px;
+    padding: 8px 12px;
+}
+
+/* Reducir espacio del menú de armas */
+.weapon-selector {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.weapon-selector-title {
+    margin-bottom: 7px;
+}
+
+.weapon-options {
+    gap: 5px;
+}
+
+.weapon-option {
+    min-height: 48px;
+    padding: 7px 11px;
+}
+
+.weapon-selector-note {
+    margin-top: 5px;
+}
+
+/* HACER VISIBLE EL BOTÓN JUGAR */
+#start-button {
+    display: flex !important;
+
+    position: relative !important;
+
+    visibility: visible !important;
+    opacity: 1 !important;
+
+    width: 100%;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 12px;
+    margin-bottom: 30px;
+
+    z-index: 30;
+
+    cursor: pointer;
+}
+
+/* Barra de desplazamiento */
+#start-screen::-webkit-scrollbar,
+.screen--start::-webkit-scrollbar {
+    width: 6px;
+}
+
+#start-screen::-webkit-scrollbar-thumb,
+.screen--start::-webkit-scrollbar-thumb {
+    background: #a5d65b;
+    border-radius: 10px;
+}/* PANEL DE ARMAS Y MUNICIÓN */
+
+.weapon-block {
+    min-width: 190px;
+}
+
+.weapon-status {
+    color: #c9f568;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-top: 8px;
+}
+
+.ammo-display {
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.ammo-display strong {
+    color: #ffffff;
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.ammo-cap {
+    color: #9da99c;
+    font-size: 17px;
+}
+
+.ammo-help {
+    display: block;
+    color: #9da99c;
+    font-size: 9px;
+    margin-top: 5px;
+    letter-spacing: 1px;
+}
