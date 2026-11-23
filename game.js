@@ -391,7 +391,10 @@ function connectMultiplayer() {
 
     if (socket) return;
 
-    socket = io({ auth: { mapId: selectedMap } });
+    // En Vercel el servidor multijugador vive en otro dominio (window.MULTIPLAYER_URL).
+    // En local o en Render, el juego se conecta al mismo servidor que lo sirve.
+    const options = { auth: { mapId: selectedMap } };
+    socket = window.MULTIPLAYER_URL ? io(window.MULTIPLAYER_URL, options) : io(options);
 
     setupMultiplayer();
 }

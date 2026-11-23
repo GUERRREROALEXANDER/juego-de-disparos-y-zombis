@@ -5,7 +5,13 @@ const { Server } = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+// CORS_ORIGINS: dominios separados por coma que pueden conectarse por Socket.IO
+// (por ejemplo, el juego desplegado en Vercel). Sin la variable, solo el mismo origen.
+const allowedOrigins = (process.env.CORS_ORIGINS || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+const io = new Server(server, allowedOrigins.length ? { cors: { origin: allowedOrigins } } : {});
 
 const PORT = process.env.PORT || 3000;
 const VALID_MAPS = new Set(['forest', 'village']);
