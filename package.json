@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "node --test combat.test.mjs"
+    "test": "node --test combat.test.mjs achievements.test.mjs jump.test.mjs spatial-index.test.mjs zombie-performance.test.mjs server-sync.test.mjs"
   },
   "dependencies": {
     "express": "^4.18.2",

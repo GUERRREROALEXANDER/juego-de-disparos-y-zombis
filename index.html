@@ -3,11 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#08100d">
+	<meta name="theme-color" content="#05070a">
 	<title>Última guardia | Supervivencia zombi 3D</title>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Yellowtail&family=Barlow+Condensed:wght@500;600;700;800&family=Overpass:wght@400;500;600;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="./style.css">
 	<script type="importmap">
 		{
@@ -24,208 +24,312 @@
 	<main id="game" aria-label="Supervivencia zombi en primera persona">
 		<div id="scene-container" aria-hidden="true"></div>
 		<div id="damage-overlay" aria-hidden="true"></div>
+        <div id="fps-indicator" class="fps-indicator" aria-live="off" aria-label="Fotogramas por segundo">FPS --</div>
 		<div class="vignette" aria-hidden="true"></div>
 
 		<section id="start-screen" class="screen screen--start" aria-labelledby="game-title">
 			<div class="title-block">
-				<p class="eyebrow"><span class="live-dot"></span> TRANSMISIÓN DE EMERGENCIA · SECTOR 07</p>
-				<h1 id="game-title">ÚLTIMA<br><span>GUARDIA</span></h1>
+				<p class="eyebrow"><span class="live-dot"></span><span class="eyebrow-text">Transmisión de emergencia · Sector 07</span></p>
+
+				<h1 id="game-title" class="wordmark">
+					<span class="wm-a">Última</span>
+					<span class="wm-band" aria-hidden="true"></span>
+					<span class="wm-b">Guardia</span>
+				</h1>
+
 				<p class="intro">La noche cayó sobre el bosque. No dejes que se acerquen.</p>
+
 				<!-- SELECTOR DE MAPAS -->
-<div class="map-selector">
+				<div class="map-selector">
 
-    <p class="map-selector-label">
-        SELECCIONA TU ESCENARIO
-    </p>
+					<p class="map-selector-label">
+						Selecciona tu escenario
+					</p>
 
-    <div class="map-options">
+					<div class="map-options">
 
-        <!-- MAPA 1 -->
-        <button
-            class="map-option"
-            type="button"
-            data-map="forest"
-            aria-pressed="true"
-        >
+						<!-- MAPA 1 -->
+						<button
+							class="map-option"
+							type="button"
+							data-map="forest"
+							aria-pressed="true"
+						>
 
-            <span class="map-option-icon">🌲</span>
+							<span class="map-option-icon" aria-hidden="true">🌲</span>
 
-            <span class="map-option-copy">
-                <strong>Bosque nocturno</strong>
-                <small>Árboles, casas y niebla.</small>
-            </span>
+							<span class="map-option-copy">
+								<strong>Bosque nocturno</strong>
+								<small>Árboles, casas y niebla.</small>
+							</span>
 
-            <span class="map-option-check">✓</span>
+							<span class="map-option-check" aria-hidden="true">✓</span>
 
-        </button>
+						</button>
 
-        <!-- MAPA 2 -->
-        <button
-            class="map-option"
-            type="button"
-            data-map="village"
-            aria-pressed="false"
-        >
+						<!-- MAPA 2 -->
+						<button
+							class="map-option"
+							type="button"
+							data-map="village"
+							aria-pressed="false"
+						>
 
-            <span class="map-option-icon">🏚️</span>
+							<span class="map-option-icon" aria-hidden="true">🏚️</span>
 
-            <span class="map-option-copy">
-                <strong>Pueblo abandonado</strong>
-                <small>Carreteras, casas y contenedores.</small>
-            </span>
+							<span class="map-option-copy">
+								<strong>Pueblo abandonado</strong>
+								<small>Carreteras, casas y contenedores.</small>
+							</span>
 
-            <span class="map-option-check">✓</span>
+							<span class="map-option-check" aria-hidden="true">✓</span>
 
-        </button>
+						</button>
 
-    </div>
+					</div>
 
-    <p id="map-description" class="map-description">
-        Sobrevive en un bosque lleno de zombis.
-    </p>
+					<p id="map-description" class="map-description">
+						Sobrevive en un bosque lleno de zombis.
+					</p>
 
-</div>
+				</div>
 
-<!-- BOTÓN PARA COMENZAR -->
- <!-- SELECTOR DE ARMAS -->
+				
+                <!-- Skins livianas: colores y materiales, sin modelos pesados. -->
+                <div class="skin-selector" aria-labelledby="skin-title">
+                    <p id="skin-title" class="skin-selector-title">Elige tu superviviente</p>
+                    <div class="skin-options" role="group" aria-label="Apariencia del personaje">
+                        <button type="button" class="skin-option is-selected" data-skin="survivor" aria-pressed="true"><span class="skin-avatar survivor" aria-hidden="true"><i></i></span><strong>Explorador</strong><small>Clásico</small></button>
+                        <button type="button" class="skin-option" data-skin="military" aria-pressed="false"><span class="skin-avatar military" aria-hidden="true"><i></i></span><strong>Militar</strong><small>Camuflaje</small></button>
+                        <button type="button" class="skin-option" data-skin="medic" aria-pressed="false"><span class="skin-avatar medic" aria-hidden="true"><i></i></span><strong>Médico</strong><small>Rescate</small></button>
+                        <button type="button" class="skin-option" data-skin="night" aria-pressed="false"><span class="skin-avatar night" aria-hidden="true"><i></i></span><strong>Nocturno</strong><small>Sigilo</small></button>
+                    </div>
+                    <p class="skin-selector-note">Solo cambia la apariencia: todos tienen las mismas habilidades.</p>
+                </div>
 
-<div class="weapon-selector">
+                                <!-- Calidad visual configurable, sin alterar las mecánicas -->
+                <div class="graphics-settings" aria-labelledby="graphics-title">
+                    <div class="graphics-settings-heading">
+                        <p id="graphics-title">Calidad gráfica</p>
+                    </div>
+                    <div class="graphics-options" role="group" aria-label="Calidad gráfica">
+                        <button type="button" class="graphics-option" data-quality="low" aria-pressed="false">Rendimiento</button>
+                        <button type="button" class="graphics-option is-selected" data-quality="medium" aria-pressed="true">Equilibrado</button>
+                        <button type="button" class="graphics-option" data-quality="high" aria-pressed="false">Cinemático</button>
+                    </div>
+                </div>
 
-    <p class="weapon-selector-title">
-        ARSENAL DISPONIBLE
-    </p>
+<!-- SELECTOR DE ARMAS -->
 
-    <div class="weapon-options">
+				<div class="weapon-selector">
 
-        <button
-            class="weapon-option is-selected"
-            data-weapon="pistol"
-            aria-pressed="true"
-            type="button"
-        >
-            <span class="weapon-key">1</span>
+					<p class="weapon-selector-title">
+						Arsenal disponible
+					</p>
 
-            <span class="weapon-icon">🔫</span>
+					<div class="weapon-options">
 
-            <span class="weapon-info">
-                <strong>PISTOLA</strong>
-                <small>12 BALAS · EQUILIBRADA</small>
-            </span>
+						<button
+							class="weapon-option is-selected"
+							data-weapon="pistol"
+							aria-pressed="true"
+							type="button"
+						>
+							<span class="weapon-key">1</span>
 
-        </button>
+							<span class="weapon-icon" aria-hidden="true">🔫</span>
 
-        <button
-            class="weapon-option"
-            data-weapon="shotgun"
-            aria-pressed="false"
-            type="button"
-        >
-            <span class="weapon-key">2</span>
+							<span class="weapon-info">
+								<strong>Pistola</strong>
+								<small>12 balas · Equilibrada</small>
+							</span>
 
-            <span class="weapon-icon">💥</span>
+						</button>
 
-            <span class="weapon-info">
-                <strong>ESCOPETA</strong>
-                <small>8 BALAS · ALTO DAÑO</small>
-            </span>
+						<button
+							class="weapon-option"
+							data-weapon="shotgun"
+							aria-pressed="false"
+							type="button"
+						>
+							<span class="weapon-key">2</span>
 
-        </button>
+							<span class="weapon-icon" aria-hidden="true">💥</span>
 
-        <button
-            class="weapon-option"
-            data-weapon="rifle"
-            aria-pressed="false"
-            type="button"
-        >
-            <span class="weapon-key">3</span>
+							<span class="weapon-info">
+								<strong>Escopeta</strong>
+								<small>8 balas · Alto daño</small>
+							</span>
 
-            <span class="weapon-icon">🎯</span>
+						</button>
 
-            <span class="weapon-info">
-                <strong>RIFLE DE ASALTO</strong>
-                <small>30 BALAS · AUTOMÁTICO</small>
-            </span>
+						<button
+							class="weapon-option"
+							data-weapon="rifle"
+							aria-pressed="false"
+							type="button"
+						>
+							<span class="weapon-key">3</span>
 
-        </button>
+							<span class="weapon-icon" aria-hidden="true">🎯</span>
 
-    </div>
+							<span class="weapon-info">
+								<strong>Rifle de asalto</strong>
+								<small>30 balas · Automático</small>
+							</span>
 
-    <p class="weapon-selector-note">
-        Selecciona tu arma antes de comenzar.
-    </p>
+						</button>
 
-</div>
-<button id="start-button" class="action-button" type="button">
-    Jugar <span aria-hidden="true">↗</span>
-</button>
+					</div>
+
+					<p class="weapon-selector-note">
+						Selecciona tu arma antes de comenzar.
+					</p>
+
+				</div>
+
+				<button id="start-button" class="action-button" type="button">
+					<span>Jugar</span><span class="action-arrow" aria-hidden="true">↗</span>
+				</button>
 			</div>
+
 			<aside class="briefing" aria-label="Controles del juego">
-				<p class="briefing-title">PROTOCOLO DE SUPERVIVENCIA</p>
+				<p class="briefing-title">Protocolo de supervivencia</p>
 				<div class="control-row"><span class="key-group"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>Moverse</span></div>
 				<div class="control-row"><span class="mouse-icon" aria-hidden="true"></span><span>Mirar</span></div>
 				<div class="control-row"><span class="mouse-left">CLIC IZQ.</span><span>Disparar</span></div>
-				<div class="control-row"><kbd>R</kbd><span>Recargar · reserva ilimitada</span></div><p class="briefing-note">Clic en «Jugar» para activar el ratón. Pulsa Esc para pausar.</p>
+				<div class="control-row"><kbd>R</kbd><span>Recargar · reserva ilimitada</span></div>
+                <div class="control-row"><kbd>ESPACIO</kbd><span>Saltar</span></div>
+				<p class="briefing-note">L · Ver logros desbloqueados</p>
+                <p class="briefing-note">Clic en «Jugar» para activar el ratón. Pulsa Esc para pausar.</p>
 			</aside>
-			<div class="screen-footer"><span>UNA NOCHE. SIN REFUERZOS.</span><span>PROTOCOLO 01 / 03</span></div>
+
+			<div class="screen-footer"><span>Una noche. Sin refuerzos.</span><span>Protocolo 01 / 03</span></div>
 		</section>
 
+        <section id="tutorial" class="tutorial-overlay" role="dialog" aria-modal="true"
+                 aria-labelledby="tutorial-title" aria-describedby="tutorial-intro" hidden>
+            <div class="tutorial-card">
+                <p class="tutorial-eyebrow">Guía de supervivencia</p>
+                <div class="tutorial-progress" id="tutorial-progress">Paso 1 de 3</div>
+                <h2 id="tutorial-title">Aprende a jugar</h2>
+                <p id="tutorial-intro" class="tutorial-intro">Conoce los controles básicos antes de empezar.</p>
+
+                <div class="tutorial-step" data-tutorial-step="0">
+                    <h3>1. Muévete por el escenario</h3>
+                    <p>Utiliza el teclado para caminar, el ratón para mirar y la barra espaciadora para saltar.</p>
+                    <div class="tutorial-keys"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><span>Moverse</span></div>
+                    <div class="tutorial-keys"><kbd>ESPACIO</kbd><span>Saltar</span></div>
+                    <div class="tutorial-keys"><span class="tutorial-mouse">Ratón</span><span>Mirar alrededor</span></div>
+                </div>
+                <div class="tutorial-step" data-tutorial-step="1" hidden>
+                    <h3>2. Prepárate para sobrevivir</h3>
+                    <p>Mantén a los zombis a distancia y vigila la munición de tu arma.</p>
+                    <div class="tutorial-keys"><span class="tutorial-mouse">Clic izquierdo</span><span>Disparar</span></div>
+                    <div class="tutorial-keys"><kbd>R</kbd><span>Recargar</span></div>
+                    <div class="tutorial-keys"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd><span>Cambiar de arma</span></div>
+                </div>
+                <div class="tutorial-step" data-tutorial-step="2" hidden>
+                    <h3>3. Consulta tu progreso</h3>
+                    <p>Observa tu vida, las rondas y los logros mientras juegas.</p>
+                    <div class="tutorial-keys"><kbd>L</kbd><span>Ver logros</span></div>
+                    <div class="tutorial-keys"><kbd>Q</kbd><span>Cambiar la calidad gráfica</span></div>
+                    <div class="tutorial-keys"><kbd>E</kbd><span>Abrir puertas y suministros</span></div>
+                    <div class="tutorial-keys"><kbd>ESC</kbd><span>Pausar la partida</span></div>
+                </div>
+                <div class="tutorial-actions">
+                    <button type="button" id="tutorial-skip" class="tutorial-skip">Omitir y jugar</button>
+                    <button type="button" id="tutorial-next" class="tutorial-next">Siguiente →</button>
+                </div>
+                <p class="tutorial-footer">Al comenzar, haz clic en la pantalla si necesitas activar el ratón.</p>
+            </div>
+        </section>
+
 		<section id="pause-screen" class="screen screen--compact hidden" aria-labelledby="pause-title">
-			<p class="eyebrow">DESCANSO NO SIGNIFICA SEGURIDAD</p>
-			<h2 id="pause-title">EN PAUSA</h2>
-			<button id="resume-button" class="action-button" type="button">Continuar <span aria-hidden="true">↗</span></button>
+			<p class="eyebrow"><span class="eyebrow-text">Descanso no significa seguridad</span></p>
+			<h2 id="pause-title">En pausa</h2>
+			<button id="resume-button" class="action-button" type="button"><span>Continuar</span><span class="action-arrow" aria-hidden="true">↗</span></button>
 			<p class="subtle-note">Pulsa Continuar para volver al bosque.</p>
 		</section>
 
 		<section id="game-over-screen" class="screen screen--compact hidden" aria-labelledby="game-over-title">
-			<p class="eyebrow">SEÑAL PERDIDA · SECTOR 07</p>
-			<h2 id="game-over-title">NO SOBREVIVISTE</h2>
+			<p class="eyebrow"><span class="eyebrow-text">Señal perdida · Sector 07</span></p>
+			<h2 id="game-over-title">No sobreviviste</h2>
 			<p class="result-line">Zombis eliminados <strong id="final-score">0</strong></p>
-			<button id="restart-button" class="action-button" type="button">Intentar de nuevo <span aria-hidden="true">↻</span></button>
+            <p class="result-line">Oleada alcanzada <strong id="final-wave">01</strong></p>
+            <p class="result-line">Logros desbloqueados <strong id="final-achievements">0/6</strong></p>
+			<button id="restart-button" class="action-button" type="button"><span>Intentar de nuevo</span><span class="action-arrow" aria-hidden="true">↻</span></button>
 		</section>
 
-		<div id="hud" class="hud hidden" aria-live="polite">
+		<div id="hud" class="hud hidden" aria-live="off">
+			<!-- SALUD: solo una línea fina en el borde inferior -->
 			<div class="hud-block health-block">
-				<span class="hud-label">ESTADO</span>
+				<span class="hud-label">Estado</span>
 				<div class="health-line"><span class="health-cross" aria-hidden="true">+</span><strong><span id="health-val">100</span><small>%</small></strong></div>
 				<div class="health-track"><span id="health-fill"></span></div>
 			</div>
-			<div class="hud-block score-block"><span class="hud-label">ELIMINADOS</span><strong id="score-val">00</strong></div>
-			<!-- PANEL DE ARMAS Y MUNICIÓN -->
-<div class="hud-block weapon-block">
 
-    <span class="hud-label">ARMAMENTO</span>
+			<!-- OLEADA: el numeral gigante de la esquina inferior izquierda -->
+			<div class="hud-round">
+				<span class="hud-label">Oleada</span>
+				<span id="wave-val" class="hud-num">01</span>
+                <span id="wave-countdown" class="wave-countdown">Siguiente oleada: 35 s</span>
+			</div>
 
-    <div id="weapon-status" class="weapon-status">
-        PISTOLA
-    </div>
+			<!-- PUNTOS + ARMA + MUNICIÓN: columna derecha -->
+			<div class="hud-stats">
+				<div class="hud-block score-block">
+					<span class="hud-label">Eliminados</span>
+					<strong id="score-val">00</strong>
+				</div>
 
-    <div class="ammo-display">
-        <strong id="ammo-val">12</strong>
-        <span class="ammo-cap"> / 12</span>
-    </div>
+				<div class="hud-block weapon-block">
 
-    <span class="ammo-help">R · RECARGAR</span>
+					<div id="weapon-status" class="weapon-status">
+						PISTOLA
+					</div>
 
-</div>
+					<div class="ammo-display">
+						<strong id="ammo-val">12</strong>
+						<span class="ammo-cap"> / 12</span>
+					</div>
+
+					<div id="ammo-pips" class="ammo-pips" aria-hidden="true">
+						<span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+						<span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+					</div>
+
+					<span class="ammo-help">R · Recargar</span>
+
+				</div>
+			</div>
+
 			<div class="hud-location">
-    <span class="live-dot"></span>
+				<span class="live-dot"></span>
+				<span id="hud-map-name">
+					Bosque nocturno · 02:17 AM
+				</span>
+			</div>
+		</div>
 
-    <span id="hud-map-name">
-        BOSQUE NOCTURNO · 02:17 AM
-    </span>
-</div>
-		</div><div id="minimap">
-   <div class="map-title" id="map-title">
-    MAPA · BOSQUE
-</div>
-    <canvas id="minimap-canvas" width="180" height="180"></canvas>
-</div>
-<div id="multiplayer-status" class="multiplayer-status"
-     role="status" aria-live="polite">
-    MULTIJUGADOR · ESPERANDO CONEXIÓN
-</div>
+		<div id="game-toast" class="game-toast hidden" role="status" aria-live="polite"></div>
+        <div id="achievements-panel" class="achievements-panel" aria-label="Logros del juego" hidden>
+            <h3>🏆 Logros <span id="achievements-count">0/6</span></h3>
+            <ul id="achievements-list"></ul>
+        </div>
+        <div id="minimap">
+			<div class="map-title" id="map-title">
+				Mapa · Bosque
+			</div>
+			<canvas id="minimap-canvas" width="180" height="180"></canvas>
+		</div>
+
+		<div id="multiplayer-status" class="multiplayer-status" role="status" aria-live="polite">
+			Multijugador · Esperando conexión
+		</div>
+
 		<div id="crosshair" class="crosshair hidden" aria-hidden="true"><i></i><i></i><i></i><i></i><b></b></div>
-		<div id="hit-marker" class="hit-marker" aria-hidden="true">×</div>
+		<div id="hit-marker" class="hit-marker" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
 		<div id="game-error" class="game-error hidden" role="alert"></div>
 	</main>
 </body>

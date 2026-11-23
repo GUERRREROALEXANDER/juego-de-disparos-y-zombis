@@ -1,6 +1,6 @@
 # Supervivencia Zombi 3D
 
-Prototipo local en primera persona para la presentación de Calidad de Software. El navegador ejecuta el juego y sus mecánicas; Node.js solo sirve los archivos y publica el estado del servidor.
+Prototipo local en primera persona para la presentación de Calidad de Software. El navegador ejecuta el juego y sus mecánicas; Node.js sirve los archivos y sincroniza el multijugador básico mediante Socket.IO.
 
 ## Requisitos
 
@@ -23,7 +23,7 @@ Prototipo local en primera persona para la presentación de Calidad de Software.
   ```
 
 4. Abre **http://localhost:3000** en Chrome o Edge. Para comprobar el servidor visita **http://localhost:3000/api/health**.
-5. Pulsa «Jugar» y permite el bloqueo del puntero. Si el navegador lo deniega, se activa el modo de ratón libre. Pulsa Esc para pausar y Esc o «Continuar» para regresar.
+5. Pulsa «Jugar», sigue u omite el tutorial inicial y permite el bloqueo del puntero. Si el navegador lo deniega, se activa el modo de ratón libre. Pulsa Esc para pausar y Esc o «Continuar» para regresar.
 
 Si el puerto 3000 ya está ocupado, en PowerShell establece otro puerto antes de arrancar:
 
@@ -43,8 +43,12 @@ Para detener el servidor, vuelve a PowerShell y pulsa Ctrl+C.
 | Avanzar / retroceder | W / S |
 | Desplazarse a izquierda / derecha | A / D |
 | Mirar y apuntar | Ratón (modo libre si el navegador deniega el bloqueo) |
-| Disparar | Mantener clic izquierdo (fusil automático) |
-| Recargar | R (24 balas por cargador, reserva ilimitada) |
+| Disparar | Clic izquierdo (mantener para el rifle automático) |
+| Recargar | R (munición por arma, reserva ilimitada) |
+| Saltar | Barra espaciadora (Espacio) |
+| Interactuar con puertas y suministros | E |
+| Logros | L |
+| Cambiar calidad gráfica | Q |
 | Pausar / continuar | Esc / botón «Continuar» |
 
 ## Alcance
@@ -59,10 +63,12 @@ Para detener el servidor, vuelve a PowerShell y pulsa Ctrl+C.
 | Corredor | 2 impactos al cuerpo | Rápida | 8 | Nivel 2 |
 | Coloso | 10 impactos al cuerpo | Lenta | 24 | Nivel 3 |
 
-El nivel aumenta cada 35 segundos de juego activo. Aumentan la resistencia y velocidad de los nuevos enemigos y la frecuencia de aparición, hasta un máximo de 24 enemigos simultáneos. Los valores de la tabla son la base antes del incremento por nivel. La pausa detiene la dificultad, recarga y combate. El escenario tiene un límite de movimiento para no salir del terreno.
+El nivel aumenta cada 35 segundos de juego activo. Aumentan la resistencia y velocidad de los nuevos enemigos y la frecuencia de aparición, hasta un máximo de 24 enemigos simultáneos. Los valores de la tabla son la base antes del incremento por nivel. La pausa detiene la dificultad, recarga y combate. El escenario tiene un límite de movimiento para no salir del terreno. Las cajas de suministros restauran hasta 25 puntos de salud y completan el cargador del arma actual.
 
-Ejecuta `npm test` para comprobar las reglas de progresión, desbloqueo de enemigos y daño en la cabeza.
+Ejecuta `npm test` para comprobar las reglas de progresión, desbloqueo de enemigos, daño, sincronización por mapa y reconexión de enemigos.
 
-**Previsto para fases posteriores:** multijugador, cuentas, autenticación, persistencia, base de datos, tabla de puntuaciones, modelos 3D detallados y audio. No forman parte de este prototipo.
+**Implementado adicionalmente:** selección de escenarios, campamento con fogata en el bosque, faroles y vehículo abandonado en el pueblo, cajas de suministros interactivos (E), puertas, skins, niveles de calidad gráfica, multijugador básico por mapa con Socket.IO, HUD, oleadas, logros y tutorial inicial.
+
+**Fuera del alcance actual:** cuentas, autenticación, base de datos persistente y tabla global de puntuaciones.
 # juego-de-disparos-y-zombis
 # juego-de-disparos-y-zombis
