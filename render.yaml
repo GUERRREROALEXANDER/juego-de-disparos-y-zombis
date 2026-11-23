@@ -1,0 +1,14 @@
+# Servidor multijugador (Express + Socket.IO) en Render.
+# Crear desde Render: New > Blueprint > seleccionar este repositorio.
+services:
+  - type: web
+    name: juego-zombis-multijugador
+    runtime: node
+    plan: free
+    branch: main
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: CORS_ORIGINS
+        value: https://juego-de-disparos-y-zombis.vercel.app
