@@ -1,0 +1,68 @@
+{
+  "hdri": {
+    "file": "assets/hdri/moonlit_golf_1k.hdr",
+    "license": "CC0",
+    "source": "https://polyhaven.com/a/moonlit_golf"
+  },
+  "pbr": {
+    "bark": {
+      "aoMap": "assets/textures/bark/ao.jpg",
+      "license": "CC0",
+      "map": "assets/textures/bark/diff.jpg",
+      "normalMap": "assets/textures/bark/nor_gl.jpg",
+      "repeat": 24,
+      "roughnessMap": "assets/textures/bark/rough.jpg",
+      "source": "https://polyhaven.com/a/bark_brown_01"
+    },
+    "ground": {
+      "aoMap": "assets/textures/ground/ao.jpg",
+      "license": "CC0",
+      "map": "assets/textures/ground/diff.jpg",
+      "normalMap": "assets/textures/ground/nor_gl.jpg",
+      "repeat": 24,
+      "roughnessMap": "assets/textures/ground/rough.jpg",
+      "source": "https://polyhaven.com/a/forrest_ground_01"
+    },
+    "rock": {
+      "aoMap": "assets/textures/rock/ao.jpg",
+      "license": "CC0",
+      "map": "assets/textures/rock/diff.jpg",
+      "normalMap": "assets/textures/rock/nor_gl.jpg",
+      "repeat": 24,
+      "roughnessMap": "assets/textures/rock/rough.jpg",
+      "source": "https://polyhaven.com/a/rock_01"
+    }
+  },
+  "trees": [
+    {
+      "file": "assets/trees/pine_trees.glb",
+      "license": "CC0",
+      "source": "https://poly.pizza/m/oYtDty0fR6"
+    },
+    {
+      "file": "assets/trees/dead_trunk_02/dead_tree_trunk_02_1k.gltf",
+      "license": "CC0",
+      "source": "https://polyhaven.com/a/dead_tree_trunk_02",
+      "targetHeight": 1.2
+    },
+    {
+      "file": "assets/trees/stump_01/tree_stump_01_1k.gltf",
+      "license": "CC0",
+      "source": "https://polyhaven.com/a/tree_stump_01",
+      "targetHeight": 0.8
+    }
+  ],
+  "zombie": {
+    "file": "assets/models/zombie.glb",
+    "clips": {
+      "walk": "Zombie|ZombieWalk",
+      "attack": "Zombie|ZombieBite",
+      "death": null,
+      "idle": "Zombie|ZombieIdle"
+    },
+    "license": "CC-BY 3.0",
+    "author": "Quaternius",
+    "source": "https://poly.pizza/m/jkrEvQZb8J",
+    "note": "Skin recolored to gray by the zeroed project (github.com/biel40/zeroed); no death clip, the game tips the body over instead."
+  }
+}
