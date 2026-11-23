@@ -1,0 +1,6 @@
+{
+  "framework": null,
+  "installCommand": "npm install --omit=dev",
+  "buildCommand": "node vercel-build.mjs",
+  "outputDirectory": "dist"
+}
